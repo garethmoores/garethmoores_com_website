@@ -44,7 +44,7 @@ amplify/backend/.temp
 build/
 dist/
 node_modules/
-aws-exports.js
+# aws-exports.js - should not be in gitignore. AWS needs it to build.
 awsconfiguration.json
 amplifyconfiguration.json
 amplifyconfiguration.dart
