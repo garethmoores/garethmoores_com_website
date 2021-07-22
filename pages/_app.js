@@ -1,4 +1,4 @@
-import '../styles/globals.css'
+import 'tailwindcss/tailwind.css';
 import config from '../src/aws-exports';
 import { Amplify } from "aws-amplify";
 
