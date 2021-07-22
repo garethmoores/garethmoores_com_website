@@ -1,4 +1,3 @@
-import styles from '../styles/Home.module.css'
 import { DataStore } from 'aws-amplify'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
@@ -18,13 +17,13 @@ export default function Home() {
   }, [])
   
   return (
-    <div className={styles.container}>
-      <h1>Posts</h1>
+    <div className="container mx-auto">
+      <h1 className="text-center text-xl">Posts</h1>
       {
         posts.map(post => (
           <Link key={post.id} href={`/posts/${post.id}`}>
             <a>
-              <h2>{post.title}</h2>
+              <p className="text-center">{post.title}</p>
             </a>
           </Link>
         ))
