@@ -1,6 +1,7 @@
 import { DataStore } from 'aws-amplify'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Helmet from 'react-helmet'
 import { Post } from '../src/models'
 
 export default function Home() {
@@ -17,17 +18,24 @@ export default function Home() {
   }, [])
   
   return (
-    <div className="container mx-auto">
-      <h1 className="text-center text-xl">Posts</h1>
-      {
-        posts.map(post => (
-          <Link key={post.id} href={`/posts/${post.id}`}>
-            <a>
-              <p className="text-center">{post.title}</p>
-            </a>
-          </Link>
-        ))
-      }
-    </div>
+      <div className="">
+        <Helmet>
+          <html lang="en" />
+          <title>GarethMoores.com</title>
+          <meta name="description" content="GarethMoores.com" />
+        </Helmet>
+          <div className="container mx-auto">
+            <h1 className="text-center text-xl">Posts</h1>
+            {
+              posts.map(post => (
+                <Link key={post.id} href={`/posts/${post.id}`}>
+                  <a>
+                    <p className="text-center">{post.title}</p>
+                  </a>
+                </Link>
+              ))
+            }
+          </div>
+      </div>
   )
 }
