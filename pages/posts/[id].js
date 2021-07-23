@@ -2,6 +2,7 @@ import { withSSRContext } from 'aws-amplify'
 import { Post } from '../../src/models'
 import Markdown from 'react-markdown'
 import { useRouter } from 'next/router'
+import Layout from "../../components/Layout"
 
 export default function PostComponent({ post }) {
   const router = useRouter()
@@ -9,9 +10,11 @@ export default function PostComponent({ post }) {
     return <div>Loading...</div>
   }
   return (
-    <div>
-      <Markdown>{post.content}</Markdown>
-    </div>
+      <Layout title={"GarethMoores.com: " + post.title} description={"GarethMoores.com: " + post.title}>
+        <div>
+          <Markdown>{post.content}</Markdown>
+        </div>
+      </Layout>
   )
 }
 
@@ -25,7 +28,7 @@ export async function getStaticPaths(req) {
   }
 }
 
-export async function getStaticProps (req) {
+export async function getStaticProps(req) {
   const { DataStore } = withSSRContext(req)
   const { params } = req
   const { id } = params
