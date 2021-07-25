@@ -1,4 +1,5 @@
 import 'tailwindcss/tailwind.css';
+import '../styles/garethmoores.css';
 import config from '../src/aws-exports';
 import { Amplify } from "aws-amplify";
 

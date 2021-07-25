@@ -10,7 +10,7 @@ function Sidebar() {
 
         {/* Logo & Site Name */}
         <Link href="/">
-            <a className="text-white flex items-center space-x-2">
+            <a className="text-white flex items-center space-x-2 no-underline">
                 <TerminalIcon props={"h-8 w-8"} />
                 <div className="text-2xl font-extrabold">
                     Gareth Moores
@@ -27,6 +27,7 @@ function Sidebar() {
         <nav className="pt-10">
             <NavItem href="/">Home</NavItem>
             <NavItem href="/about">About</NavItem>
+            <NavItem href="/contact">Contact</NavItem>
         </nav>
 
         {/* Contact Icons */}
@@ -50,7 +51,7 @@ function Sidebar() {
 
 function ContactIcon({ href, children }) {
     return (
-      <a href={href} rel="nopener noreferrer" target="_blank">
+      <a href={href} className="text-white no-underline" rel="nopener noreferrer" target="_blank">
         <li className="m-1 h-8 w-8 bg-white rounded-full flex items-center justify-center border-2 border-gray-400">
             {children}
         </li>
@@ -61,7 +62,7 @@ function ContactIcon({ href, children }) {
 function NavItem({ href, children }) {
     return (
         <Link href={href}>
-            <a className="block py-2.5 px-4 rounded transition duraction-200 hover:bg-blue-700 hover:text-white">{children}</a>
+            <a className="text-white block py-2.5 px-4 rounded transition duraction-200 hover:bg-blue-700 hover:text-white no-underline">{children}</a>
         </Link>
     );
 }
