@@ -5,7 +5,7 @@ import Markdown from 'react-markdown';
 import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
 import Sidebar from '../../components/Sidebar';
-import Page from '../../components/Page';
+import PageBody from '../../components/PageBody';
 
 export default function PostComponent({ post }) {
   const router = useRouter()
@@ -15,9 +15,9 @@ export default function PostComponent({ post }) {
   return (
       <Layout title={"GarethMoores.com: " + post.title} description={"GarethMoores.com: " + post.title}>
         <Sidebar />
-        <Page>
+        <PageBody>
           <Markdown>{post.content}</Markdown>
-        </Page>
+        </PageBody>
       </Layout>
   )
 }

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Post } from '../src/models';
 import Layout from '../components/Layout';
 import Sidebar from '../components/Sidebar';
-import Page from '../components/Page';
+import PageBody from '../components/PageBody';
 
 export default function Home() {
   const [posts, setPosts] = useState([])
@@ -22,7 +22,7 @@ export default function Home() {
   return (
       <Layout title="GarethMoores.com" description="GarethMoores.com">
         <Sidebar />
-          <Page>
+          <PageBody>
             <h1 className="text-center text-xl">
               Posts
             </h1>
@@ -37,7 +37,7 @@ export default function Home() {
                   </Link>
               ))
             }
-          </Page>
+          </PageBody>
       </Layout>
   )
 }

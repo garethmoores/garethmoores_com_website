@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Page(props) {
+function PageBody(props) {
     return (
         <div className="flex-1 p-10 text-base font-normal">
             {props.children}
@@ -8,4 +8,4 @@ function Page(props) {
     );
 }
 
-export default Page;
+export default PageBody;

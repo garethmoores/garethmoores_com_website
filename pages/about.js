@@ -1,15 +1,16 @@
 import React from 'react';
 import Layout from '../components/Layout';
 import Sidebar from '../components/Sidebar';
-import Page from '../components/Page';
+import PageBody from '../components/PageBody';
 
 export default function About() {
     return (
-        <Layout title="GarethMoores.com" description="GarethMoores.com">
+        <Layout title="GarethMoores.com: About Me" description="GarethMoores.com: About Me">
             <Sidebar />
-            <Page>
-                About Page
-            </Page>
+            <PageBody>
+                <p className="font-bold text-xl pb-4">About Me</p>
+                <p>I&apos;m Gareth, a developer working in Brisbane, Australia.</p>
+            </PageBody>
         </Layout>
     );
 };
