@@ -1,9 +1,10 @@
-import { DataStore } from 'aws-amplify'
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
-import { Post } from '../src/models'
-import Layout from '../components/Layout'
-
+import { DataStore } from 'aws-amplify';
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { Post } from '../src/models';
+import Layout from '../components/Layout';
+import Sidebar from '../components/Sidebar';
+import Page from '../components/Page';
 
 export default function Home() {
   const [posts, setPosts] = useState([])
@@ -20,22 +21,23 @@ export default function Home() {
   
   return (
       <Layout title="GarethMoores.com" description="GarethMoores.com">
-        <div className="container mx-auto">
-          <h1 className="text-center text-xl">
-            Posts
-          </h1>
-          {
-            posts.map(post => (
-              <Link key={post.id} href={`/posts/${post.id}`}>
-                <a>
-                  <p className="text-center">
-                    {post.title}
-                  </p>
-                </a>
-              </Link>
-            ))
-          }
-        </div>
+        <Sidebar />
+          <Page>
+            <h1 className="text-center text-xl">
+              Posts
+            </h1>
+            {
+              posts.map(post => (
+                  <Link key={post.id} href={`/posts/${post.id}`}>
+                    <a>
+                      <p className="text-center">
+                        {post.title}
+                      </p>
+                    </a>
+                  </Link>
+              ))
+            }
+          </Page>
       </Layout>
   )
 }

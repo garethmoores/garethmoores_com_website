@@ -1,17 +1,19 @@
 import React from 'react';
-import Helmet from 'react-helmet';
+import Head from 'next/head';
 
 function Layout(props) {
     return (
         <div className="">
-            <Helmet>
+            <Head>
                 <html lang="en" />
                 <title>{props.title}</title>
                 <meta name="description" content={props.description} />
-            </Helmet>
-            {props.children}
+            </Head>
+            <div className="relative min-h-screen flex">
+                {props.children}
+            </div>
         </div>
     );
-};
+}
 
 export default Layout;

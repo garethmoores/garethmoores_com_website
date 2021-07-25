@@ -1,8 +1,11 @@
-import { withSSRContext } from 'aws-amplify'
-import { Post } from '../../src/models'
-import Markdown from 'react-markdown'
-import { useRouter } from 'next/router'
-import Layout from "../../components/Layout"
+import React from 'react';
+import { withSSRContext } from 'aws-amplify';
+import { Post } from '../../src/models';
+import Markdown from 'react-markdown';
+import { useRouter } from 'next/router';
+import Layout from '../../components/Layout';
+import Sidebar from '../../components/Sidebar';
+import Page from '../../components/Page';
 
 export default function PostComponent({ post }) {
   const router = useRouter()
@@ -11,9 +14,10 @@ export default function PostComponent({ post }) {
   }
   return (
       <Layout title={"GarethMoores.com: " + post.title} description={"GarethMoores.com: " + post.title}>
-        <div>
+        <Sidebar />
+        <Page>
           <Markdown>{post.content}</Markdown>
-        </div>
+        </Page>
       </Layout>
   )
 }
