@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
 import Sidebar from '../../components/Sidebar';
 import PageBody from '../../components/PageBody';
+import {MobileBarBottom, MobileBarTop} from "../../components/MobileBar";
 
 export default function PostComponent({ post }) {
   const router = useRouter()
@@ -14,10 +15,12 @@ export default function PostComponent({ post }) {
   }
   return (
       <Layout title={"GarethMoores.com: " + post.title} description={"GarethMoores.com: " + post.title}>
+        <MobileBarTop />
         <Sidebar />
         <PageBody>
           <Markdown>{post.content}</Markdown>
         </PageBody>
+        <MobileBarBottom />
       </Layout>
   )
 }

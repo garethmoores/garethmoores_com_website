@@ -5,7 +5,7 @@ import { Post } from '../src/models';
 import Layout from '../components/Layout';
 import Sidebar from '../components/Sidebar';
 import PageBody from '../components/PageBody';
-import MobileBar from "../components/MobileBar";
+import { MobileBarTop, MobileBarBottom } from '../components/MobileBar';
 
 export default function Home() {
   const [posts, setPosts] = useState([])
@@ -22,6 +22,7 @@ export default function Home() {
   
   return (
       <Layout title="GarethMoores.com" description="GarethMoores.com">
+        <MobileBarTop />
         <Sidebar />
           <PageBody>
             <h1 className="text-center text-xl">
@@ -39,6 +40,7 @@ export default function Home() {
               ))
             }
           </PageBody>
+        <MobileBarBottom />
       </Layout>
   )
 }

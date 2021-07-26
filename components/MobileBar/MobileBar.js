@@ -1,11 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
-import { TerminalIcon } from '../svg/TerminalIcon';
-import { MenuIcon } from '../svg/MenuIcon';
+import { ContactIcon, TerminalIcon, GitHubIcon, LinkedinIcon } from '../Icons';
+import Copyright from '../Copyright';
 
-function MobileBar() {
+export function MobileBarTop() {
   return (
-    <div className="bg-gray-800 text-gray-100 flex justify-between md:hidden">
+    <nav className="fixed w-full top-0 bg-gray-800 text-gray-100 flex justify-between md:hidden">
       {/* Logo and Site Name */}
       <Link href="/">
         <a className="block p-4 text-white font-bold flex no-underline">
@@ -15,16 +15,41 @@ function MobileBar() {
           <span className="pl-3">
             Gareth Moores
           </span>
+          <span className="font-light text-sm pl-8 pt-1">
+            <NavItem href="/">Home</NavItem>
+            <NavItem href="/about">About</NavItem>
+            <NavItem href="/contact">Contact</NavItem>
+          </span>
         </a>
       </Link>
-
-      {/* Mobile Menu Button */}
-      <button className="p-4 focus:outline-none focus:bg-gray-700">
-        <MenuIcon props={"h-5 w-5"} />
-      </button>
-
-    </div>
+    </nav>
   )
 }
 
-export default MobileBar;
+export function MobileBarBottom() {
+  return (
+    <nav className="fixed pb-2 bottom-0 inset-x-0 bg-gray-800 text-gray-100 md:hidden content-center items-center">
+      <div className="flex flex-wrap px-6 pt-4 justify-between items-center">
+        <span className="flex pl-4">
+          <ContactIcon href="https://www.linkedin.com/in/gareth-moores-7a692a79/" styling="h-6 w-6">
+            <LinkedinIcon props={"h-3 w-3"} />
+          </ContactIcon>
+          <ContactIcon href="https://github.com/garethmoores/" styling="h-6 w-6">
+            <GitHubIcon props={"h-3 w-3"} />
+          </ContactIcon>
+        </span>
+        <Copyright props="text-sm font-extralight px-4" />
+      </div>
+    </nav>
+  )
+}
+
+function NavItem({ href, children }) {
+  return (
+    <Link href={href}>
+      <a className="text-gray-100 py-2 px-4 rounded transition duraction-200 hover:bg-white hover:text-black no-underline">
+        {children}
+      </a>
+    </Link>
+  );
+}

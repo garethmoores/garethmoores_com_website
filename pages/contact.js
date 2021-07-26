@@ -4,6 +4,7 @@ import Sidebar from "../components/Sidebar";
 import PageBody from "../components/PageBody";
 import { useRouter } from "next/router";
 import { useCallback, useEffect } from 'react';
+import {MobileBarBottom, MobileBarTop} from "../components/MobileBar";
 
 export default function Contact() {
   const textTitleClass = "uppercase text-base text-gray-600 font-bold";
@@ -27,6 +28,7 @@ export default function Contact() {
 
   return (
     <Layout title="GarethMoores.com: Contact Me" description="GarethMoores.com: Contact Me">
+      <MobileBarTop />
       <Sidebar />
       <PageBody>
         <p className="font-bold text-xl pb-6">Contact Me</p>
@@ -53,6 +55,7 @@ export default function Contact() {
           </button>
         </form>
       </PageBody>
+      <MobileBarBottom />
     </Layout>
   );
 }

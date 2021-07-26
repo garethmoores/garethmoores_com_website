@@ -1,1 +1,1 @@
-export { default } from './MobileBar';
+export { MobileBarTop, MobileBarBottom } from './MobileBar';
