@@ -3,10 +3,40 @@ import Link from 'next/link';
 import { TerminalIcon } from '../svg/TerminalIcon';
 import { LinkedinIcon } from '../svg/LinkedinIcon';
 import { GitHubIcon } from '../svg/GitHubIcon';
+import {MenuIcon} from "../svg/MenuIcon";
 
 function Sidebar() {
-    return (
-      <div className="bg-blue-800 text-blue-100 w-64 space-y-6 px-2 py-7">
+  const {sidebar} = document.querySelector(".sidebar");
+
+  function handleMobileButton() {
+    sidebar.classList.toggle("-translate-x-full");
+  }
+
+  return (
+    <div>
+      {/* Mobile Bar */}
+      <div className="bg-gray-800 text-gray-100 flex justify-between md:hidden">
+          {/* Logo and Site Name */}
+          <Link href="/">
+              <a className="block p-4 text-white font-bold flex no-underline">
+      <span className="pt-1">
+        <TerminalIcon props={"h-4 w-4"} />
+      </span>
+                  <span className="pl-3">
+        Gareth Moores
+      </span>
+              </a>
+          </Link>
+
+          {/* Mobile Menu Button */}
+          <button className="p-4 focus:outline-none focus:bg-gray-700" onClick={handleMobileButton}>
+              <MenuIcon props={"h-5 w-5"} />
+          </button>
+        </div>
+
+      {/* Side Bar */}
+      <div className="sidebar bg-blue-800 text-blue-100 w-64 space-y-6 px-2 py-7 absolute inset-y-0 left-0 transform
+            -translate-x-full md:relative md:translate-x-0 transition duration-200 ease-in-out">
 
         {/* Logo & Site Name */}
         <Link href="/">
@@ -45,8 +75,9 @@ function Sidebar() {
              &copy; All rights reserved.
          </div>
       </div>
+    </div>
 
-    );
+  );
 }
 
 function ContactIcon({ href, children }) {

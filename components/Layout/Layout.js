@@ -9,7 +9,7 @@ function Layout(props) {
                 <title>{props.title}</title>
                 <meta name="description" content={props.description} />
             </Head>
-            <div className="relative min-h-screen flex">
+            <div className="relative min-h-screen md:flex">
                 {props.children}
             </div>
         </div>

@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import Sidebar from "../components/Sidebar";
 import PageBody from "../components/PageBody";
 import { useRouter } from "next/router";
+import { useCallback, useEffect } from 'react';
 
 export default function Contact() {
   const textTitleClass = "uppercase text-base text-gray-600 font-bold";
@@ -10,12 +11,19 @@ export default function Contact() {
   const submitButtonClass = "uppercase text-sm font-bold tracking-wide bg-indigo-500 text-gray-100 p-3 rounded-lg w-full focus:outline-none focus:bg-indigo-400";
   const router = useRouter();
 
-  const handleSubmit = event => {
+  const handleSubmit = useCallback((event) => {
     event.preventDefault();
 
 
     router.push('/thankyou');
-  }
+    }, []
+  )
+
+  useEffect(() => {
+    // Pre-fetch the thank-you page.
+    router.prefetch('/thankyou');
+    }, []
+  )
 
   return (
     <Layout title="GarethMoores.com: Contact Me" description="GarethMoores.com: Contact Me">
