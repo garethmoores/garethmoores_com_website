@@ -15,13 +15,13 @@ export function MobileBarTop() {
           <span className="pl-3">
             Gareth Moores
           </span>
-          <span className="font-light text-sm pl-8 pt-1">
-            <NavItem href="/">Home</NavItem>
-            <NavItem href="/about">About</NavItem>
-            <NavItem href="/contact">Contact</NavItem>
-          </span>
         </a>
       </Link>
+      <span className="font-light text-sm pl-8 pt-5">
+        <NavItem href="/">Home</NavItem>
+        <NavItem href="/about">About</NavItem>
+        <NavItem href="/contact">Contact</NavItem>
+      </span>
     </nav>
   )
 }

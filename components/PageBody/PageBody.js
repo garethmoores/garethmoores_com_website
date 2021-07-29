@@ -6,7 +6,9 @@ function PageBody(props) {
           <h1 className="font-semibold">
             {props.title}
           </h1>
-          <p className="text-nice-orange font-medium">{props.date}</p>
+          <p className="text-nice-orange font-medium">
+            {props.date}
+          </p>
           <div className="pt-6">
             {props.children}
           </div>

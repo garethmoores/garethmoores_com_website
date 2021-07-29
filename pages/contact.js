@@ -15,23 +15,32 @@ class Contact extends React.Component {
   };
 
   handleSubmit = async event => {
-    const api_url = 'https://sj3th9dltj.execute-api.us-east-1.amazonaws.com/sendEmail';
-
     event.preventDefault();
 
+    {/*
     if (this.state.emailValid) {
-      await fetch(api_url, {
+      await fetch('https://sj3th9dltj.execute-api.us-east-1.amazonaws.com/sendEmail', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
           name: this.state.name_input,
           email: this.state.email_input,
           desc: this.state.desc_input,
-        }),
+        })
       })
         .then(response => response.json())
         .then(result => console.log("Response:", result))
     }
+    */}
+
+    const result = await fetch('https://sj3th9dltj.execute-api.us-east-1.amazonaws.com/sendEmail', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: {'name': 'gareth test', 'email': 'gareth20@gmail.com', 'desc': 'gareth test description'}
+    })
+
+    const response = result.json();
+    console.log("Response: " + response);
   };
 
   handleChange = event => {

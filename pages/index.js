@@ -46,7 +46,7 @@ export default function Home() {
               */}
               {
                 post.content.length > MAX_LENGTH
-                  ? <p>
+                  ? <div>
                       <Markdown className="whitespace-pre-line py-5">
                         {`${post.content.substring(0, MAX_LENGTH)}...`}
                       </Markdown>
@@ -55,12 +55,12 @@ export default function Home() {
                           Read More
                         </a>
                       </Link>
-                    </p>
-                  : <p>
+                    </div>
+                  : <div>
                       <Markdown className="whitespace-pre-line py-5">
                         {post.content}
                       </Markdown>
-                    </p>
+                    </div>
               }
             </div>
           ))
