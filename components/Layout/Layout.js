@@ -5,7 +5,6 @@ function Layout(props) {
     return (
         <div className="">
             <Head>
-                <html lang="en" />
                 <title>{props.title}</title>
                 <meta name="description" content={props.description} />
             </Head>
