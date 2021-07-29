@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
 import Sidebar from '../../components/Sidebar';
 import PageBody from '../../components/PageBody';
-import {MobileBarBottom, MobileBarTop} from "../../components/MobileBar";
+import { MobileBarBottom, MobileBarTop } from '../../components/MobileBar';
 
 export default function PostComponent({ post }) {
   const router = useRouter()

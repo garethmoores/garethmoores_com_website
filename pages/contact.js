@@ -2,60 +2,77 @@ import React from 'react';
 import Layout from "../components/Layout";
 import Sidebar from "../components/Sidebar";
 import PageBody from "../components/PageBody";
-import { useRouter } from "next/router";
-import { useCallback, useEffect } from 'react';
-import {MobileBarBottom, MobileBarTop} from "../components/MobileBar";
+import { MobileBarBottom, MobileBarTop } from "../components/MobileBar";
 
-export default function Contact() {
-  const textTitleClass = "uppercase text-base text-gray-600 font-bold";
-  const textInputClass = "w-full bg-gray-300 text-gray-900 mt-2 mb-6 p-3 rounded-lg focus:outline-none focus:bg-blue-200 focus:border-grey-500";
-  const submitButtonClass = "uppercase text-sm font-bold tracking-wide bg-indigo-500 text-gray-100 p-3 rounded-lg w-full focus:outline-none focus:bg-indigo-400";
-  const router = useRouter();
+class Contact extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { name_input: '', email_input: '', desc_input: '', }
 
-  const handleSubmit = useCallback((event) => {
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  };
+
+  handleSubmit = async event => {
     event.preventDefault();
 
+    const res = await fetch('https://sj3th9dltj.execute-api.us-east-1.amazonaws.com/sendEmail', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: this.state.name_input,
+        email: this.state.email_input,
+        desc: this.state.desc_input,
+      }),
+    })
 
-    router.push('/thankyou');
-    }, []
-  )
+    const result = await res.json();
+    console.log(result);
+  };
 
-  useEffect(() => {
-    // Pre-fetch the thank-you page.
-    router.prefetch('/thankyou');
-    }, []
-  )
+  handleChange = event => {
+    let name = event.target.name;
+    let value = event.target.value;
 
-  return (
-    <Layout title="GarethMoores.com: Contact Me" description="GarethMoores.com: Contact Me">
-      <MobileBarTop />
-      <Sidebar />
-      <PageBody>
-        <p className="font-bold text-xl pb-6">Contact Me</p>
+    this.setState({[name]: value});
+  }
 
-        <p className="font-bolde text-6xl">Contact Form is not currently working!!!!!</p>
+  render() {
+    const textTitleClass = "uppercase text-base text-gray-600 font-bold";
+    const textInputClass = "w-full bg-gray-300 text-gray-900 mt-2 mb-6 p-3 rounded-lg focus:outline-none focus:bg-blue-200 focus:border-grey-500";
+    const submitButtonClass = "uppercase text-sm font-bold tracking-wide bg-indigo-500 text-gray-100 p-3 rounded-lg w-full focus:outline-none focus:bg-indigo-400";
 
-        <form id="contact-form" method="post" onSubmit={handleSubmit}>
-          <label className={textTitleClass} htmlFor="name-input">Name:</label>
-          <input className={textInputClass} type="text" id="name-input" placeholder="Enter name" required />
-          <br/>
+    return (
+      <Layout title="GarethMoores.com: Contact Me" description="GarethMoores.com: Contact Me">
+        <MobileBarTop />
+        <Sidebar />
+        <PageBody>
+          <p className="font-bold text-xl pb-6">Contact Me</p>
 
-          <label className={textTitleClass} htmlFor="email-input">Email:</label>
-          <input className={textInputClass} type="text" id="email-input" placeholder="Enter email" required />
-          <br/>
+          <p className="font-bold text-6xl">Contact Form is not currently working!!!!!</p>
 
-          <label className={textTitleClass} htmlFor="description-input">How can I help you?</label>
-          <textarea className={textInputClass} id="description-input" rows="3" placeholder="Enter your message" required />
-          <br/>
+          <form id="contact-form" method="post" onSubmit={this.handleSubmit}>
+            <label className={textTitleClass} htmlFor="name-input">Name:</label>
+            <input className={textInputClass} onChange={this.handleChange} type="text" id="name-input" name="name_input" placeholder="Enter name" required />
+            <br/>
 
-          <div className="g-recaptcha form-control" data-sitekey="6Lc7cVMUAAAAAM1yxf64wrmO8gvi8A1oQ_ead1ys" />
+            <label className={textTitleClass} htmlFor="email-input">Email:</label>
+            <input className={textInputClass} onChange={this.handleChange} type="text" id="email-input" name="email_input" placeholder="Enter email" required />
+            <br/>
 
-          <button type="submit" className={submitButtonClass}>
-            Send Message
-          </button>
-        </form>
-      </PageBody>
-      <MobileBarBottom />
-    </Layout>
-  );
+            <label className={textTitleClass} htmlFor="desc-input">How can I help you?</label>
+            <textarea className={textInputClass} onChange={this.handleChange} id="desc-input" name="desc_input" rows="3" placeholder="Enter your message" required />
+            <br/>
+
+            <button type="submit" className={submitButtonClass}>
+              Send Message
+            </button>
+          </form>
+        </PageBody>
+        <MobileBarBottom />
+      </Layout>
+    )
+  };
 }
+
+export default Contact;

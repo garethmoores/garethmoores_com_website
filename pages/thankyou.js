@@ -5,7 +5,7 @@ import Sidebar from '../components/Sidebar';
 import PageBody from '../components/PageBody';
 import {MobileBarBottom, MobileBarTop} from "../components/MobileBar";
 
-export default function About() {
+function ThankYou() {
   return (
     <Layout title="GarethMoores.com: Thank-you" description="GarethMoores.com: Thank-you">
       <MobileBarTop />
@@ -17,4 +17,6 @@ export default function About() {
       <MobileBarBottom />
     </Layout>
   );
-};
+}
+
+export default ThankYou;

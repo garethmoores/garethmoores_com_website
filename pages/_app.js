@@ -1,3 +1,4 @@
+import React from 'react';
 import 'tailwindcss/tailwind.css';
 import '../styles/garethmoores.css';
 import config from '../src/aws-exports';
