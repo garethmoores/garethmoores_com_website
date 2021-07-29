@@ -1,6 +1,7 @@
 import { DataStore } from 'aws-amplify';
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Markdown from 'react-markdown';
 import { Post } from '../src/models';
 import Layout from '../components/Layout';
 import Sidebar from '../components/Sidebar';
@@ -25,18 +26,30 @@ export default function Home() {
         <MobileBarTop />
         <Sidebar />
           <PageBody>
-            <h1 className="text-center text-xl">
-              Posts
-            </h1>
             {
               posts.map(post => (
-                  <Link key={post.id} href={`/posts/${post.id}`}>
-                    <a>
-                      <p className="text-center">
+                <div key={post.id} className="pb-10">
+                  <p className="font-medium text-nice-orange">
+                    {post.month_year}
+                  </p>
+                  <Link href={`/posts/${post.id}`}>
+                    <a className="no-underline text-black hover:underline">
+                      <h1 className="font-semibold">
                         {post.title}
-                      </p>
+                      </h1>
                     </a>
                   </Link>
+                  <p>
+                    <Markdown className="whitespace-pre-line py-5">
+                      {post.content}
+                    </Markdown>
+                  </p>
+                  <Link href={`/posts/${post.id}`}>
+                    <a className="no-underline hover:underline">
+                        Read
+                    </a>
+                  </Link>
+                </div>
               ))
             }
           </PageBody>

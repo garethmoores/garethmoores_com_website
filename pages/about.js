@@ -9,8 +9,7 @@ export default function About() {
         <Layout title="GarethMoores.com: About Me" description="GarethMoores.com: About Me">
           <MobileBarTop />
           <Sidebar />
-          <PageBody>
-            <p className="font-bold text-xl pb-4">About Me</p>
+          <PageBody title="About Me">
             <p>I&apos;m Gareth, a developer working in Brisbane, Australia.</p>
           </PageBody>
           <MobileBarBottom />

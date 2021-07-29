@@ -14,9 +14,11 @@ class Contact extends React.Component {
   };
 
   handleSubmit = async event => {
+    const api_url = 'https://sj3th9dltj.execute-api.us-east-1.amazonaws.com/sendEmail';
+
     event.preventDefault();
 
-    const res = await fetch('https://sj3th9dltj.execute-api.us-east-1.amazonaws.com/sendEmail', {
+    await fetch(api_url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -25,9 +27,9 @@ class Contact extends React.Component {
         desc: this.state.desc_input,
       }),
     })
-
-    const result = await res.json();
-    console.log(result);
+      .then(response => response.json())
+      .then(result => console.log("Success response:", result))
+      .catch(error => console.error("Error response:", error))
   };
 
   handleChange = event => {
@@ -40,15 +42,13 @@ class Contact extends React.Component {
   render() {
     const textTitleClass = "uppercase text-base text-gray-600 font-bold";
     const textInputClass = "w-full bg-gray-300 text-gray-900 mt-2 mb-6 p-3 rounded-lg focus:outline-none focus:bg-blue-200 focus:border-grey-500";
-    const submitButtonClass = "uppercase text-sm font-bold tracking-wide bg-indigo-500 text-gray-100 p-3 rounded-lg w-full focus:outline-none focus:bg-indigo-400";
+    const submitButtonClass = "uppercase text-sm font-bold tracking-wide bg-blue-800 text-gray-100 p-3 rounded-lg w-full focus:outline-none focus:bg-indigo-400";
 
     return (
       <Layout title="GarethMoores.com: Contact Me" description="GarethMoores.com: Contact Me">
         <MobileBarTop />
         <Sidebar />
-        <PageBody>
-          <p className="font-bold text-xl pb-6">Contact Me</p>
-
+        <PageBody title="Contact Me">
           <p className="font-bold text-6xl">Contact Form is not currently working!!!!!</p>
 
           <form id="contact-form" method="post" onSubmit={this.handleSubmit}>

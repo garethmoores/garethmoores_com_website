@@ -10,8 +10,7 @@ function ThankYou() {
     <Layout title="GarethMoores.com: Thank-you" description="GarethMoores.com: Thank-you">
       <MobileBarTop />
       <Sidebar />
-      <PageBody>
-        <p className="font-bold text-xl pb-4">Thank-you for submitting the form.</p>
+      <PageBody title="Thank-you for submitting the form.">
         <Link href="/"><a className="text-xl ">Return Home</a></Link>
       </PageBody>
       <MobileBarBottom />

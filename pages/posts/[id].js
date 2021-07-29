@@ -17,9 +17,10 @@ export default function PostComponent({ post }) {
       <Layout title={"GarethMoores.com: " + post.title} description={"GarethMoores.com: " + post.title}>
         <MobileBarTop />
         <Sidebar />
-        <PageBody>
-          <h1>{post.title}</h1>
-          <Markdown className="py-8">{post.content}</Markdown>
+        <PageBody title={post.title} date={post.month_year}>
+          <Markdown className="whitespace-pre-line">
+            {post.content}
+          </Markdown>
         </PageBody>
         <MobileBarBottom />
       </Layout>
