@@ -18,7 +18,8 @@ export default function PostComponent({ post }) {
         <MobileBarTop />
         <Sidebar />
         <PageBody>
-          <Markdown>{post.content}</Markdown>
+          <h1>{post.title}</h1>
+          <Markdown className="py-8">{post.content}</Markdown>
         </PageBody>
         <MobileBarBottom />
       </Layout>
