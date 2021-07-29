@@ -45,23 +45,22 @@ export default function Home() {
               display "Read More" link if greater.
               */}
               {
-                post.content.length > MAX_LENGTH ?
-                  (<p>
-                    <Markdown className="whitespace-pre-line py-5">
-                      {`${post.content.substring(0, MAX_LENGTH)}...`}
-                    </Markdown>
-                    <Link href={`/posts/${post.id}`}>
-                      <a className="no-underline hover:underline">
-                        Read More
-                      </a>
-                    </Link>
-                  </p>
-                  ) :
-                  <p>
-                    <Markdown className="whitespace-pre-line py-5">
-                      {post.content}
-                    </Markdown>
-                  </p>
+                post.content.length > MAX_LENGTH
+                  ? <p>
+                      <Markdown className="whitespace-pre-line py-5">
+                        {`${post.content.substring(0, MAX_LENGTH)}...`}
+                      </Markdown>
+                      <Link href={`/posts/${post.id}`}>
+                        <a className="no-underline hover:underline">
+                          Read More
+                        </a>
+                      </Link>
+                    </p>
+                  : <p>
+                      <Markdown className="whitespace-pre-line py-5">
+                        {post.content}
+                      </Markdown>
+                    </p>
               }
             </div>
           ))
