@@ -33,14 +33,25 @@ class Contact extends React.Component {
     }
     */}
 
-    const result = await fetch('https://sj3th9dltj.execute-api.us-east-1.amazonaws.com/sendEmail', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: {'name': 'gareth test', 'email': 'gareth20@gmail.com', 'desc': 'gareth test description'}
-    })
+    function handleErrors(response) {
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
+      return response;
+    }
 
-    const response = result.json();
-    console.log("Response: " + response);
+    await fetch('https://sj3th9dltj.execute-api.us-east-1.amazonaws.com/sendEmail', {
+      "method": 'POST',
+      "headers": {'Content-Type': 'application/json'},
+      "body": {'name': 'gareth test', 'email': 'gareth20@gmail.com', 'desc': 'gareth test description'}
+    })
+      .then(handleErrors)
+      .then(response => response.json())
+      .then(result => console.log("Response:", result))
+      .catch(
+        function() {
+          alert("Cannot submit contact form. Please contact administrator at admin@garethmoores.com")
+        });
   };
 
   handleChange = event => {

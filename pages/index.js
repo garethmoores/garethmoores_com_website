@@ -13,7 +13,7 @@ export default function Home() {
   const MAX_LENGTH = 400;
 
   useEffect(() => {
-    fetchPosts()
+    fetchPosts().then();
     async function fetchPosts() {
       const postData = await DataStore.query(Post)
       setPosts(postData)
