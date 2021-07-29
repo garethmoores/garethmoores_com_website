@@ -31,10 +31,6 @@ class Contact extends React.Component {
       })
         .then(response => response.json())
         .then(result => console.log("Response:", result))
-        .catch(function(error) {
-          console.log("Error:", error);
-          alert("Contact form not working. Please contact administrator.");
-        })
     }
   };
 
