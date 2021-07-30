@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'next/router';
 import Layout from "../components/Layout";
 import Sidebar from "../components/Sidebar";
 import PageBody from "../components/PageBody";
@@ -15,6 +16,8 @@ class Contact extends React.Component {
   };
 
   handleSubmit = async event => {
+    const API_URL = 'https://sj3th9dltj.execute-api.us-east-1.amazonaws.com/sendEmail';
+
     event.preventDefault();
 
     {/*
@@ -33,25 +36,27 @@ class Contact extends React.Component {
     }
     */}
 
+    if (this.state.emailValid) {
+      await fetch(API_URL, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: {name: 'gareth test', email: 'gareth20@gmail.com', desc: this.state.desc_input}
+      })
+        .then(handleErrors)
+        .then(response => response.json())
+        .then(withRouter.push('/thankyou'))
+        .catch(
+          function () {
+            alert("Cannot submit contact form. Please contact administrator at admin@garethmoores.com")
+          });
+    }
+
     function handleErrors(response) {
       if (!response.ok) {
         throw Error(response.statusText);
       }
       return response;
     }
-
-    await fetch('https://sj3th9dltj.execute-api.us-east-1.amazonaws.com/sendEmail', {
-      "method": 'POST',
-      "headers": {'Content-Type': 'application/json'},
-      "body": {'name': 'gareth test', 'email': 'gareth20@gmail.com', 'desc': 'gareth test description'}
-    })
-      .then(handleErrors)
-      .then(response => response.json())
-      .then(result => console.log("Response:", result))
-      .catch(
-        function() {
-          alert("Cannot submit contact form. Please contact administrator at admin@garethmoores.com")
-        });
   };
 
   handleChange = event => {
