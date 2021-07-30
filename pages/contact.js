@@ -30,7 +30,7 @@ class Contact extends React.Component {
           'Accept': 'application/json, text/plain, */*',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({name: this.state.name_input, email: this.state.email_input, desc: this.state.desc_input})
+        body: {name: this.state.name_input, email: this.state.email_input, desc: this.state.desc_input}
       })
         .then(handleErrors)
         .then(() => this.state.formSubmitted = true)
