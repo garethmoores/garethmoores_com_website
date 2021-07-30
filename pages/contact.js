@@ -4,12 +4,15 @@ import Layout from "../components/Layout";
 import Sidebar from "../components/Sidebar";
 import PageBody from "../components/PageBody";
 import { MobileBarBottom, MobileBarTop } from "../components/MobileBar";
+import Link from "next/link";
 
 class Contact extends React.Component {
   constructor(props) {
     super(props);
     this.state = { name_input: '', email_input: '', desc_input: '', }
+    {/* Call the email valid to start to prevent an ugly error before the user can attempt to fill out the field. */}
     this.state.emailValid = true;
+    this.state.formSubmitted = false;
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -20,31 +23,18 @@ class Contact extends React.Component {
 
     event.preventDefault();
 
-    {/*
     if (this.state.emailValid) {
-      await fetch('https://sj3th9dltj.execute-api.us-east-1.amazonaws.com/sendEmail', {
+      await fetch(API_URL, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
           name: this.state.name_input,
           email: this.state.email_input,
-          desc: this.state.desc_input,
+          desc: this.state.desc_input
         })
       })
-        .then(response => response.json())
-        .then(result => console.log("Response:", result))
-    }
-    */}
-
-    if (this.state.emailValid) {
-      await fetch(API_URL, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: {name: 'gareth test', email: 'gareth20@gmail.com', desc: this.state.desc_input}
-      })
         .then(handleErrors)
-        .then(response => response.json())
-        .then(withRouter.push('/thankyou'))
+        .then(() => this.state.formSubmitted = true)
         .catch(
           function () {
             alert("Cannot submit contact form. Please contact administrator at admin@garethmoores.com")
@@ -86,39 +76,59 @@ class Contact extends React.Component {
       emailInputClass = "w-full bg-red-300 text-gray-900 mt-2 mb-6 p-3 rounded-lg focus:outline-none focus:bg-blue-200 focus:border-grey-500";
     }
 
+    if (this.state.formSubmitted) {
       return (
-      <Layout title="GarethMoores.com: Contact Me" description="GarethMoores.com: Contact Me">
-        <MobileBarTop />
-        <Sidebar />
-        <PageBody title="Contact Me">
-          <p className="font-bold text-6xl">Contact Form is not currently working!!!!!</p>
+        <Layout title="GarethMoores.com: Thank-You" description="GarethMoores.com: Thank-You">
+          <MobileBarTop/>
+          <Sidebar/>
+          <PageBody title="Thank-you for submitting the form.">
+            <Link href="/">
+              <a className="text-xl">
+                Return Home
+              </a>
+            </Link>
+          </PageBody>
+          <MobileBarBottom />
+        </Layout>
+      )
+    } else {
+      return (
+        <Layout title="GarethMoores.com: Contact Me" description="GarethMoores.com: Contact Me">
+          <MobileBarTop/>
+          <Sidebar/>
+          <PageBody title="Contact Me">
+            <p className="font-bold text-6xl">Contact Form is not currently working!!!!!</p>
 
-          <form id="contact-form" method="post" onSubmit={this.handleSubmit}>
-            <label className={textTitleClass} htmlFor="name-input">Name:</label>
-            <input className={textInputClass} onBlur={this.handleChange} type="text" id="name-input" name="name_input" placeholder="Enter name" required />
-            <br/>
+            <form id="contact-form" method="post" onSubmit={this.handleSubmit}>
+              <label className={textTitleClass} htmlFor="name-input">Name:</label>
+              <input className={textInputClass} onBlur={this.handleChange} type="text" id="name-input" name="name_input"
+                     placeholder="Enter name" required/>
+              <br/>
 
-            <label className={textTitleClass} htmlFor="email-input">Email:</label>
-            <input className={emailInputClass} onBlur={this.handleChange} type="text" id="email-input" name="email_input" placeholder="Enter email" required />
-            {
-              this.state.emailValid
-              ? <div>&nbsp;</div>
-              : <div className="font-bold text-sm text-red-600">Email is not valid</div>
-            }
-            <br/>
+              <label className={textTitleClass} htmlFor="email-input">Email:</label>
+              <input className={emailInputClass} onBlur={this.handleChange} type="text" id="email-input"
+                     name="email_input" placeholder="Enter email" required/>
+              {
+                this.state.emailValid
+                  ? <div>&nbsp;</div>
+                  : <div className="font-bold text-sm text-red-600">Email is not valid</div>
+              }
+              <br/>
 
-            <label className={textTitleClass} htmlFor="desc-input">How can I help you?</label>
-            <textarea className={textInputClass} onBlur={this.handleChange} id="desc-input" name="desc_input" rows="3" placeholder="Enter your message" required />
-            <br/>
+              <label className={textTitleClass} htmlFor="desc-input">How can I help you?</label>
+              <textarea className={textInputClass} onBlur={this.handleChange} id="desc-input" name="desc_input" rows="3"
+                        placeholder="Enter your message" required/>
+              <br/>
 
-            <button type="submit" className={submitButtonClass}>
-              Send Message
-            </button>
-          </form>
-        </PageBody>
-        <MobileBarBottom />
-      </Layout>
-    )
+              <button type="submit" className={submitButtonClass}>
+                Send Message
+              </button>
+            </form>
+          </PageBody>
+          <MobileBarBottom/>
+        </Layout>
+      )
+    }
   };
 }
 
