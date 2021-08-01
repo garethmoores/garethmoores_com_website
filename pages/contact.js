@@ -1,5 +1,4 @@
 import React from 'react';
-import { withRouter } from 'next/router';
 import Layout from "../components/Layout";
 import Sidebar from "../components/Sidebar";
 import PageBody from "../components/PageBody";
@@ -26,8 +25,11 @@ class Contact extends React.Component {
     if (this.state.emailValid) {
       await fetch(API_URL, {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: {name: this.state.name_input, email: this.state.email_input, desc: this.state.desc_input}
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({name: this.state.name_input, email: this.state.email_input, desc: this.state.desc_input})
       })
         .then(handleErrors)
         .then(() => this.state.formSubmitted = true)
