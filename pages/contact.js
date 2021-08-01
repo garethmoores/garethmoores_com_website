@@ -20,7 +20,6 @@ class Contact extends React.Component {
 
   handleSubmit = async event => {
     const API_URL = 'https://sj3th9dltj.execute-api.us-east-1.amazonaws.com/sendEmail';
-
     event.preventDefault();
 
     if (this.state.emailValid) {
@@ -105,13 +104,24 @@ class Contact extends React.Component {
           <PageBody title="Contact Me">
             <form id="contact-form" method="post" onSubmit={this.handleSubmit}>
               <label className={textTitleClass} htmlFor="name-input">Name:</label>
-              <input className={textInputClass} onBlur={this.handleFormFieldLeave} type="text" id="name-input" name="name_input"
-                     placeholder="Enter name" required/>
+              <input className={textInputClass}
+                     onBlur={this.handleFormFieldLeave}
+                     type="text"
+                     id="name-input"
+                     name="name_input"
+                     placeholder="Enter name"
+                     required />
               <br/>
 
               <label className={textTitleClass} htmlFor="email-input">Email:</label>
-              <input className={emailInputClass} onBlur={this.handleFormFieldLeave} onFocus={this.handleEmailFieldFocus} type="text" id="email-input"
-                     name="email_input" placeholder="Enter email" required/>
+              <input className={emailInputClass}
+                     onBlur={this.handleFormFieldLeave}
+                     onFocus={this.handleEmailFieldFocus}
+                     type="text"
+                     id="email-input"
+                     name="email_input"
+                     placeholder="Enter email"
+                     required />
               {
                 this.state.emailValid
                   ? <div>&nbsp;</div>
@@ -120,10 +130,14 @@ class Contact extends React.Component {
               <br/>
 
               <label className={textTitleClass} htmlFor="desc-input">How can I help you?</label>
-              <textarea className={textInputClass} onBlur={this.handleFormFieldLeave} id="desc-input" name="desc_input" rows="3"
-                        placeholder="Enter your message" required/>
+              <textarea className={textInputClass}
+                        onBlur={this.handleFormFieldLeave}
+                        id="desc-input"
+                        name="desc_input"
+                        rows="3"
+                        placeholder="Enter your message"
+                        required />
               <br/>
-
               <button type="submit" className={submitButtonClass}>
                 Send Message
               </button>
