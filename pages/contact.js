@@ -32,7 +32,7 @@ class Contact extends React.Component {
         body: JSON.stringify({name: this.state.name_input, email: this.state.email_input, desc: this.state.desc_input})
       })
         .then(handleErrors)
-        .then(() => this.state.formSubmitted = true)
+        .then(() => this.setState({formSubmitted: true}))
         .catch(
           function () {
             alert("Cannot submit contact form. Please contact administrator at admin@garethmoores.com")
