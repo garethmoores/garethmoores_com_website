@@ -9,8 +9,10 @@ import PageBody from '../components/PageBody';
 import { MobileBarTop, MobileBarBottom } from '../components/MobileBar';
 
 export default function Home() {
+  {/* How many characters of the post to display. Any posts that are too long will be truncated and have "Read More" link. */}
+  const MAX_POST_LENGTH = 400;
+
   const [posts, setPosts] = useState([])
-  const MAX_LENGTH = 400;
 
   useEffect(() => {
     fetchPosts().then();
@@ -45,10 +47,10 @@ export default function Home() {
               display "Read More" link if greater.
               */}
               {
-                post.content.length > MAX_LENGTH
+                post.content.length > MAX_POST_LENGTH
                   ? <div>
                       <Markdown className="whitespace-pre-line py-5">
-                        {`${post.content.substring(0, MAX_LENGTH)}...`}
+                        {`${post.content.substring(0, MAX_POST_LENGTH)}...`}
                       </Markdown>
                       <Link href={`/posts/${post.id}`}>
                         <a className="no-underline hover:underline">
