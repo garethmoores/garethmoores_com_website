@@ -14,7 +14,8 @@ class Contact extends React.Component {
     this.state.formSubmitted = false;
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.handleFormFieldLeave = this.handleFormFieldLeave.bind(this);
+    this.handleEmailFieldFocus = this.handleEmailFieldFocus.bind(this);
   };
 
   handleSubmit = async event => {
@@ -47,7 +48,7 @@ class Contact extends React.Component {
     }
   };
 
-  handleChange = event => {
+  handleFormFieldLeave = event => {
     let name = event.target.name;
     let value = event.target.value;
 
@@ -58,8 +59,15 @@ class Contact extends React.Component {
         this.setState({emailValid: false})
       }
     }
-
     this.setState({[name]: value});
+  }
+
+  handleEmailFieldFocus = event => {
+    {/*
+    Set email field to valid while the person is typing into it. This is so it doesn't show an error while they are in
+    the process of typing. It will be retested for validity once they leave it.
+    */}
+    this.setState({emailValid: true});
   }
 
   render() {
@@ -95,16 +103,14 @@ class Contact extends React.Component {
           <MobileBarTop/>
           <Sidebar/>
           <PageBody title="Contact Me">
-            <p className="font-bold text-6xl">Contact Form is not currently working!!!!!</p>
-
             <form id="contact-form" method="post" onSubmit={this.handleSubmit}>
               <label className={textTitleClass} htmlFor="name-input">Name:</label>
-              <input className={textInputClass} onBlur={this.handleChange} type="text" id="name-input" name="name_input"
+              <input className={textInputClass} onBlur={this.handleFormFieldLeave} type="text" id="name-input" name="name_input"
                      placeholder="Enter name" required/>
               <br/>
 
               <label className={textTitleClass} htmlFor="email-input">Email:</label>
-              <input className={emailInputClass} onBlur={this.handleChange} type="text" id="email-input"
+              <input className={emailInputClass} onBlur={this.handleFormFieldLeave} onFocus={this.handleEmailFieldFocus} type="text" id="email-input"
                      name="email_input" placeholder="Enter email" required/>
               {
                 this.state.emailValid
@@ -114,7 +120,7 @@ class Contact extends React.Component {
               <br/>
 
               <label className={textTitleClass} htmlFor="desc-input">How can I help you?</label>
-              <textarea className={textInputClass} onBlur={this.handleChange} id="desc-input" name="desc_input" rows="3"
+              <textarea className={textInputClass} onBlur={this.handleFormFieldLeave} id="desc-input" name="desc_input" rows="3"
                         placeholder="Enter your message" required/>
               <br/>
 
