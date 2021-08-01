@@ -1,0 +1,49 @@
+var AWS = require('aws-sdk');
+var ses = new AWS.SES();
+ 
+var RECEIVER = 'FILL THIS';
+var SENDER = 'FILL THIS';
+
+var response = {
+ "isBase64Encoded": false,
+ "headers": { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'https://www.garethmoores.com'},
+ "statusCode": 200,
+ "statusDescription": 'OK',
+ "body": "{ \"result\": \"Success.\" }",
+ };
+
+
+exports.handler = function(event, context, callback) {
+    console.log('Received event:', event);
+    sendEmail(event, function (err, data) {
+        console.log("Error:", err);
+        console.log("Data:", data);
+    });
+    callback(null, response);
+};
+ 
+function sendEmail (event, callback) {
+    let event_body = JSON.parse(event.body);
+    
+    var params = {
+        Destination: {
+            ToAddresses: [
+                RECEIVER
+            ]
+        },
+        Message: {
+            Body: {
+                Text: {
+                    Data: 'name: ' + event_body.name + '\nemail: ' + event_body.email + '\ndesc: ' + event_body.desc,
+                    Charset: 'UTF-8'
+                }
+            },
+            Subject: {
+                Data: 'GarethMoores.com Contact Form: ' + event_body.name,
+                Charset: 'UTF-8'
+            }
+        },
+        Source: SENDER
+    };
+    ses.sendEmail(params, callback);
+}
