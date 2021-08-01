@@ -12,6 +12,7 @@ class Contact extends React.Component {
     {/* Call the email valid to start to prevent an ugly error before the user can attempt to fill out the field. */}
     this.state.emailValid = true;
     this.state.formSubmitted = false;
+    this.state.isSubmitting = false;
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleFormFieldLeave = this.handleFormFieldLeave.bind(this);
@@ -23,6 +24,8 @@ class Contact extends React.Component {
     event.preventDefault();
 
     if (this.state.emailValid) {
+      this.setState({isSubmitting: true});
+
       await fetch(API_URL, {
         method: 'POST',
         headers: {
@@ -36,7 +39,9 @@ class Contact extends React.Component {
         .catch(
           function () {
             alert("Cannot submit contact form. Please contact administrator at admin@garethmoores.com")
-          });
+            this.setState({isSubmitting: false});
+          }.bind(this)
+        );
     }
 
     function handleErrors(response) {
@@ -61,7 +66,7 @@ class Contact extends React.Component {
     this.setState({[name]: value});
   }
 
-  handleEmailFieldFocus = event => {
+  handleEmailFieldFocus = () => {
     {/*
     Set email field to valid while the person is typing into it. This is so it doesn't show an error while they are in
     the process of typing. It will be retested for validity once they leave it.
@@ -139,7 +144,9 @@ class Contact extends React.Component {
                         required />
               <br/>
               <button type="submit" className={submitButtonClass}>
-                Send Message
+                {this.state.isSubmitting
+                  ? 'Please wait...'
+                  : 'Send Message'}
               </button>
             </form>
           </PageBody>
